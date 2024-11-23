@@ -21,12 +21,14 @@ class HomePage extends GetView<HomeLogic> {
               child: const Text("查和弦"),
             ),
             TextButton(
-              onPressed: () {},
-              child: const Text("調音"),
+              onPressed: () {
+                Get.toNamed(AppPage.metronome.name);
+              },
+              child: const Text("節拍器"),
             ),
             TextButton(
               onPressed: () {},
-              child: const Text("節拍器"),
+              child: const Text("調音器"),
             ),
           ],
         ),

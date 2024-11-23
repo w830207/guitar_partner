@@ -13,6 +13,10 @@ dependencies:
   json_annotation: ^4.9.0
   get: ^4.6.6
   card_swiper: ^3.0.1
+  numberpicker: ^2.1.2
+  soundpool: ^2.4.1
+  just_audio: ^0.9.42
+
 
 dev_dependencies:
   flutter_test:

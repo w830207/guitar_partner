@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:guitar_partner/modules/metronome/binding.dart';
 import 'package:guitar_partner/modules/metronome/view.dart';
+import 'package:guitar_partner/modules/tuner/binding.dart';
+import 'package:guitar_partner/modules/tuner/view.dart';
 
 import 'modules/chord/binding.dart';
 import 'modules/chord/view.dart';
@@ -10,7 +12,8 @@ import 'modules/home/view.dart';
 enum AppPage {
   home("/home"),
   chord("/chord"),
-  metronome("/metronome");
+  metronome("/metronome"),
+  tuner("/tuner");
 
   const AppPage(this.name);
 
@@ -33,6 +36,11 @@ abstract class AppPages {
       name: AppPage.metronome.name,
       page: () => const MetronomePage(),
       binding: MetronomeBinding(),
+    ),
+    GetPage(
+      name: AppPage.tuner.name,
+      page: () => const TunerPage(),
+      binding: TunerBinding(),
     ),
   ];
 }

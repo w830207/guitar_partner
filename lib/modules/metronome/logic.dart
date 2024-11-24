@@ -88,12 +88,12 @@ class MetronomeLogicInAndroid extends MetronomeLogic {
   void onInit() {
     super.onInit();
     pool = Soundpool.fromOptions();
-    rootBundle.load("assets/metronomeup.wav").then((asset) {
+    rootBundle.load("assets/beat1.mp3").then((asset) {
       pool.load(asset).then((id) {
         return metronomeup = id;
       });
     });
-    rootBundle.load("assets/metronome.wav").then((asset) {
+    rootBundle.load("assets/beat2.mp3").then((asset) {
       pool.load(asset).then((id) {
         return metronome = id;
       });
@@ -163,11 +163,11 @@ class MetronomeLogicInIos extends MetronomeLogic {
     player2 = AudioPlayer();
 
     player1.setAsset(
-      "assets/metronomeup.wav",
+      "assets/beat1.mp3",
       preload: true,
     );
     player2.setAsset(
-      "assets/metronome.wav",
+      "assets/beat2.mp3",
       preload: true,
     );
   }

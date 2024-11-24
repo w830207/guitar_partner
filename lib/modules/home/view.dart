@@ -27,7 +27,9 @@ class HomePage extends GetView<HomeLogic> {
               child: const Text("節拍器"),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(AppPage.tuner.name);
+              },
               child: const Text("調音器"),
             ),
           ],

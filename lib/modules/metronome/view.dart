@@ -1,23 +1,14 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 import 'logic.dart';
 
-class MetronomePage extends StatelessWidget {
+class MetronomePage extends GetView<MetronomeLogic> {
   const MetronomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    late final MetronomeLogic controller;
-    if (Platform.isIOS) {
-      controller = Get.find<MetronomeLogicInIos>();
-    } else {
-      controller = Get.find<MetronomeLogicInAndroid>();
-    }
-
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -77,21 +68,34 @@ class MetronomePage extends StatelessWidget {
           Obx(() {
             return IgnorePointer(
               ignoring: controller.isPlaying.value,
-              child: NumberPicker(
-                minValue: 1,
-                maxValue: 1000,
-                itemHeight: 100,
-                axis: Axis.horizontal,
-                selectedTextStyle: Theme.of(context)
-                    .textTheme
-                    .headlineSmall
-                    ?.copyWith(color: Colors.blue),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.black26),
-                ),
-                value: controller.bpm.value,
-                onChanged: controller.changeBpm,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: controller.decreaseBpm,
+                    icon: const Icon(Icons.remove),
+                  ),
+                  NumberPicker(
+                    minValue: minBpm,
+                    maxValue: maxBpm,
+                    itemHeight: 100,
+                    axis: Axis.horizontal,
+                    selectedTextStyle: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(color: Colors.blue),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: Colors.black26),
+                    ),
+                    value: controller.bpm.value,
+                    onChanged: controller.changeBpm,
+                  ),
+                  IconButton(
+                    onPressed: controller.increaseBpm,
+                    icon: const Icon(Icons.add),
+                  ),
+                ],
               ),
             );
           }),

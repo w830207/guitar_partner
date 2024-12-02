@@ -16,6 +16,10 @@ class TunerLogic extends GetxController {
 
   RxString note = "".obs;
   RxString status = "".obs;
+  RxString expectedFrequency = "".obs;
+  RxString pitch = "0.0".obs;
+  RxDouble diff = 0.0.obs;
+
   RxBool isRecording = false.obs;
 
   start() async {
@@ -41,12 +45,18 @@ class TunerLogic extends GetxController {
 
       _pitchDetectorDart.getPitchFromIntBuffer(intBuffer).then((detectedPitch) {
         if (detectedPitch.pitched) {
-          print(detectedPitch.pitch);
+          pitch.value = detectedPitch.pitch.toStringAsFixed(2);
           _pitchupDart
               .handlePitch(detectedPitch.pitch)
               .then((PitchResult pitchResult) {
             note.value = pitchResult.note;
             status.value = pitchResult.tuningStatus.getDescription();
+            expectedFrequency.value =
+                pitchResult.expectedFrequency.toStringAsFixed(2);
+            diff.value = pitchResult.diffFrequency;
+
+            print(
+                "diffCebts:${pitchResult.diffCents},diff:${pitchResult.diffFrequency},ex:${pitchResult.expectedFrequency}");
           });
         }
       });

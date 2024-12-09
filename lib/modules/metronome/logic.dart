@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:get/get.dart';
 
 const int minute = 60;
@@ -15,10 +15,8 @@ class MetronomeLogic extends GetxController with GetTickerProviderStateMixin {
   Timer? timer1;
   Timer? timer2;
 
-  AudioPlayer player1 = AudioPlayer();
-  AudioPlayer player2 = AudioPlayer();
-  AudioPlayer player3 = AudioPlayer();
-  AudioPlayer player4 = AudioPlayer();
+  late AudioPool player1;
+  late AudioPool player2;
 
   Rx<MeterType> meterType = MeterType.single.obs;
 
@@ -28,14 +26,13 @@ class MetronomeLogic extends GetxController with GetTickerProviderStateMixin {
   @override
   void onInit() {
     super.onInit();
-    player1.setSource(AssetSource('beat1.mp3'));
-    player2.setSource(AssetSource('beat2.mp3'));
-    player3.setSource(AssetSource('beat2.mp3'));
-    player4.setSource(AssetSource('beat2.mp3'));
-    print(player1.playerId);
-    print(player2.playerId);
-    print(player3.playerId);
-    print(player4.playerId);
+    _loadSource();
+  }
+
+  _loadSource() async {
+    await FlameAudio.audioCache.loadAll(['beat1.mp3', 'beat2.mp3']);
+    player1 = await FlameAudio.createPool('beat1.mp3', maxPlayers: 4);
+    player2 = await FlameAudio.createPool('beat2.mp3', maxPlayers: 8);
   }
 
   changeBpm(int value) {
@@ -65,7 +62,7 @@ class MetronomeLogic extends GetxController with GetTickerProviderStateMixin {
       (timer) async {
         // 播放重音
         // print("tick");
-        player1.resume();
+        player1.start();
         tickCount.value++;
 
         tockCount.value = 0;
@@ -76,15 +73,7 @@ class MetronomeLogic extends GetxController with GetTickerProviderStateMixin {
             (t) async {
               // 播放輕音
               // print("tock");
-              switch (tockCount.value % 3) {
-                case 0:
-                  player2.resume();
-                case 1:
-                  player3.resume();
-                case 2:
-                  player4.resume();
-              }
-
+              player2.start();
               tockCount.value++;
 
               if (tockCount.value == target) t.cancel();
@@ -96,10 +85,6 @@ class MetronomeLogic extends GetxController with GetTickerProviderStateMixin {
   }
 
   stop() {
-    player1.stop();
-    player2.stop();
-    player3.stop();
-    player4.stop();
     timer1?.cancel();
     timer2?.cancel();
     tickCount.value = 0;
@@ -111,8 +96,6 @@ class MetronomeLogic extends GetxController with GetTickerProviderStateMixin {
   onClose() {
     player1.dispose();
     player2.dispose();
-    player3.dispose();
-    player4.dispose();
     timer1?.cancel();
     timer2?.cancel();
     super.onClose();

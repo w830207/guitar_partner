@@ -92,7 +92,7 @@ class ChordPainter extends CustomPainter {
 
   final pStyle = ui.ParagraphStyle(fontSize: 30);
   final pStyle2 = ui.ParagraphStyle(fontSize: 20);
-  final textStyle = ui.TextStyle(color: Colors.black);
+  final textStyle = ui.TextStyle(color: Color(0xFF343434));
   final textStyle2 = ui.TextStyle(color: Colors.white);
 
   @override
@@ -120,7 +120,7 @@ class ChordPainter extends CustomPainter {
     //線設置
     paint
       ..style = PaintingStyle.stroke
-      ..color = Colors.black
+      ..color = Color(0xFF343434)
       ..strokeWidth = 1.0;
 
     //画横线
@@ -142,7 +142,7 @@ class ChordPainter extends CustomPainter {
     if (position.baseFret == 1) {
       var paint = Paint()
         ..style = PaintingStyle.stroke //线
-        ..color = Colors.black
+        ..color = Color(0xFF343434)
         ..strokeCap = ui.StrokeCap.round
         ..strokeWidth = 8.0;
 
@@ -179,7 +179,7 @@ class ChordPainter extends CustomPainter {
     if (position.barres.isNotEmpty && position.capo == true) {
       var paint = Paint()
         ..style = PaintingStyle.stroke //线
-        ..color = Colors.black12
+        ..color = Color(0xFF343434)
         ..strokeCap = ui.StrokeCap.round
         ..strokeWidth = 40.0;
 
@@ -197,7 +197,7 @@ class ChordPainter extends CustomPainter {
     if (position.barres.isNotEmpty) {
       var paint = Paint()
         ..style = PaintingStyle.stroke //线
-        ..color = Colors.black
+        ..color = Color(0xFF343434)
         ..strokeCap = ui.StrokeCap.round
         ..strokeWidth = 40.0;
 
@@ -221,7 +221,7 @@ class ChordPainter extends CustomPainter {
     var paint = Paint()
       ..isAntiAlias = true
       ..style = PaintingStyle.fill //填充
-      ..color = Colors.black;
+      ..color = Color(0xFF343434);
 
     for (int i = 0; i < position.frets.length; i++) {
       switch (position.frets[i]) {

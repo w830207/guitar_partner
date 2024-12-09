@@ -22,7 +22,7 @@ class TunerPage extends GetView<TunerLogic> {
                 Text(
                   controller.note.value,
                   style: const TextStyle(
-                    color: Colors.black,
+                    color: Color(0xFF343434),
                     fontSize: 65.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -30,7 +30,7 @@ class TunerPage extends GetView<TunerLogic> {
                 Text(
                   controller.expectedFrequency.value,
                   style: const TextStyle(
-                    color: Colors.black,
+                    color: Color(0xFF343434),
                     fontSize: 12.0,
                   ),
                 ),
@@ -42,7 +42,7 @@ class TunerPage extends GetView<TunerLogic> {
                 Text(
                   "${controller.pitch.value} Hz",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Color(0xFF343434),
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -50,7 +50,7 @@ class TunerPage extends GetView<TunerLogic> {
                 Text(
                   controller.status.value,
                   style: const TextStyle(
-                    color: Colors.black,
+                    color: Color(0xFF343434),
                     fontSize: 18.0,
                   ),
                 ),

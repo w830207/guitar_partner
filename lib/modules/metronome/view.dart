@@ -38,7 +38,7 @@ class MetronomePage extends GetView<MetronomeLogic> {
                             decoration: BoxDecoration(
                               color: isTickHere && tockIndex == 0
                                   ? Colors.blue
-                                  : Colors.black,
+                                  : Color(0xFF343434),
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -53,7 +53,7 @@ class MetronomePage extends GetView<MetronomeLogic> {
                                 decoration: BoxDecoration(
                                   color: isTickHere && isTockHere
                                       ? Colors.blue
-                                      : Colors.black,
+                                      : Color(0xFF343434),
                                   shape: BoxShape.circle,
                                 ),
                               );
@@ -68,37 +68,40 @@ class MetronomePage extends GetView<MetronomeLogic> {
           Obx(() {
             return IgnorePointer(
               ignoring: controller.isPlaying.value,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: controller.decreaseBpm,
-                    icon: const Icon(Icons.remove),
-                  ),
-                  NumberPicker(
-                    minValue: minBpm,
-                    maxValue: maxBpm,
-                    itemHeight: 100,
-                    axis: Axis.horizontal,
-                    selectedTextStyle: Theme.of(context)
-                        .textTheme
-                        .headlineSmall
-                        ?.copyWith(color: Colors.blue),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.black26),
-                    ),
-                    value: controller.bpm.value,
-                    onChanged: controller.changeBpm,
-                  ),
-                  IconButton(
-                    onPressed: controller.increaseBpm,
-                    icon: const Icon(Icons.add),
-                  ),
-                ],
+              child: NumberPicker(
+                minValue: minBpm,
+                maxValue: maxBpm,
+                itemHeight: 100,
+                axis: Axis.horizontal,
+                selectedTextStyle: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.copyWith(color: Colors.blue),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Color(0xFF343434)),
+                ),
+                value: controller.bpm.value,
+                onChanged: controller.changeBpm,
               ),
             );
           }),
+          IgnorePointer(
+            ignoring: controller.isPlaying.value,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  onPressed: controller.decreaseBpm,
+                  icon: const Icon(Icons.remove),
+                ),
+                IconButton(
+                  onPressed: controller.increaseBpm,
+                  icon: const Icon(Icons.add),
+                ),
+              ],
+            ),
+          ),
           Obx(() {
             return IgnorePointer(
               ignoring: controller.isPlaying.value,
@@ -113,8 +116,8 @@ class MetronomePage extends GetView<MetronomeLogic> {
                       child: Image.asset(
                         meterType.img,
                         color: meterType == controller.meterType.value
-                            ? Colors.black
-                            : Colors.black26,
+                            ? Colors.blue
+                            : Color(0xFF343434),
                         width: 50,
                         height: 50,
                       ),

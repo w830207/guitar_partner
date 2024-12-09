@@ -11,13 +11,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: const ColorScheme.light(primary: Colors.grey),
+        colorScheme: const ColorScheme.light(
+          primary: Color(0xFF343434),
+          surface: Color(0xFFF1F0F0),
+        ),
       ),
       home: const HomePage(),
       getPages: AppPages.pages,

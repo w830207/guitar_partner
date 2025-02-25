@@ -18,19 +18,19 @@ class HomePage extends GetView<HomeLogic> {
               onPressed: () {
                 Get.toNamed(AppPage.chord.name);
               },
-              child: const Text("查和弦"),
+              child: const Text("Chord"),
             ),
             TextButton(
               onPressed: () {
                 Get.toNamed(AppPage.metronome.name);
               },
-              child: const Text("節拍器"),
+              child: const Text("Metronome"),
             ),
             TextButton(
               onPressed: () {
                 Get.toNamed(AppPage.tuner.name);
               },
-              child: const Text("調音器"),
+              child: const Text("Tuner"),
             ),
           ],
         ),

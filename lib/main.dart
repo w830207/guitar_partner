@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:guitar_partner/router.dart';
 
-import 'modules/home/view.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -21,8 +19,8 @@ class MyApp extends StatelessWidget {
           surface: Color(0xFFF1F0F0),
         ),
       ),
-      home: const HomePage(),
       getPages: AppPages.pages,
+      initialRoute: AppPage.home.name,
     );
   }
 }

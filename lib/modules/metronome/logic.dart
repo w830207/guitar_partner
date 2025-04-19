@@ -105,8 +105,9 @@ class MetronomeLogic extends GetxController with GetTickerProviderStateMixin {
 enum MeterType {
   single(beats: 1, img: "assets/single.webp"),
   duple(beats: 2, img: "assets/duple.webp"),
-  triple(beats: 3, img: "assets/triple.webp"),
-  quadruple(beats: 4, img: "assets/quadruple.webp");
+  // triple(beats: 3, img: "assets/triple.webp"),
+  // quadruple(beats: 4, img: "assets/quadruple.webp")
+  ;
 
   const MeterType({
     required this.beats,

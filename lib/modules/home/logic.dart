@@ -1,30 +1,31 @@
 import 'package:get/get.dart';
-import 'package:shorebird_code_push/shorebird_code_push.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class HomeLogic extends GetxController {
-  ShorebirdUpdater updater = ShorebirdUpdater();
-  int count = 0;
+  late WebViewController webViewController;
 
-  onTap() {
-    count++;
-    if (count == 5) checkForUpdates();
-  }
+  @override
+  void onInit() {
+    super.onInit();
 
-  Future<void> checkForUpdates() async {
-    count = 0;
-    Get.back();
-    // Check whether a new update is available.
-    final status = await updater.checkForUpdate();
-    Get.snackbar("status", status.name);
-
-    if (status == UpdateStatus.outdated) {
-      try {
-        Get.snackbar("updating", "updating");
-        await updater.update();
-        Get.snackbar("Restart app", "Restart app");
-      } on UpdateException catch (error) {
-        // Handle any errors that occur while updating.
-      }
-    }
+    webViewController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {},
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {},
+          onHttpError: (HttpResponseError error) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(
+          Uri.parse('https://demo-pas.cgshow-1t1b-2.com/Mobile/Index'));
   }
 }
